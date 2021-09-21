@@ -27,7 +27,6 @@
   "devDependencies": {
     "concurrently": "^3.1.0",
     "prettier": "^1.19.1",
-    "react-scripts": "0.7.0",
     "top-movies-json": "git+https://github.com/podium-eng-recruiting/podium-fe-challenge-support-2021.git"
   },
   "scripts": {
