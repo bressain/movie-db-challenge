@@ -1,18 +1,27 @@
-	[data-reactroot] 
-		{height: 100% !important; }
+@import-normalize;
 
-	html, body, #app, #app>div {
-		height: 100%;
-		font-family: 'Roboto', sans-serif;
-		background: white;
-		color: #333;
-	}
+:root {
+	--palette-primary: #2245E1;
+}
 
-	body {
-		margin: 0;
-		padding: 0;
-	}
+[data-reactroot] {
+	height: 100% !important;
+}
 
+html, body, #app, #app>div {
+	font-family: 'Roboto', sans-serif;
+	color: #333;
+}
 
+body {
+	margin: 0;
+	padding: 0;
+	background: #000;
+}
 
-
+h1, h2, h3, h4 {
+	margin: 0;
+}
+h1 {
+	font-size: 1.5em;
+}
