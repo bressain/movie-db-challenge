@@ -12,6 +12,10 @@
 	height: 100% !important;
 }
 
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
 html, body, #app, #app>div {
 	font-family: 'Roboto', sans-serif;
 	color: #333;
@@ -31,4 +35,8 @@ h1 {
 }
 h2 {
 	font-size: 2em;
+}
+ol, ul {
+	margin: 0;
+	padding: 0;
 }

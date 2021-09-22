@@ -1,21 +1,8 @@
 import { arrayOf, number, shape, string } from 'prop-types';
 import styled from '@emotion/styled';
-import { orderBy } from 'lodash-es';
 import { useMemo } from 'react';
+import Top5 from './Top5';
 
-const Top5Container = styled.div`
-  padding: 0 var(--layout-side-gutter) 48px;
-`;
-const Top5Title = styled.h2`
-  color: var(--palette-title);
-
-  & > span:first-of-type {
-    color: var(--palette-subtitle);
-  }
-`;
-const Top5List = styled.ol`
-  padding-top: 24px;
-`;
 const SectionTitle = styled.h2`
   color: var(--palette-title);
   font-size: 3em;
@@ -56,9 +43,6 @@ const BrowseAllList = styled.ul`
  * GraphQL.
  **/
 const Home = ({ allMovies }) => {
-  const topFiveMovies = useMemo(() => {
-    return orderBy(allMovies, ['voteAverage'], ['desc']).slice(0, 5);
-  }, [allMovies]);
   const allGenres = useMemo(() => {
     return allMovies.reduce((genres, movie) => {
       movie.genres.forEach(g => {
@@ -70,24 +54,7 @@ const Home = ({ allMovies }) => {
 
   return (
     <div>
-      <Top5Container>
-        <Top5Title>
-          <span>Movies: </span>
-          <span>Top 5</span>
-        </Top5Title>
-        <Top5List>
-          {topFiveMovies.map(movie => (
-            <li key={movie.id}>
-              {movie.title}
-              <ul>
-                <li>image: {movie.posterPath}</li>
-                <li>rating: {movie.voteAverage}</li>
-                <li>genres: {movie.genres.join(', ')}</li>
-              </ul>
-            </li>
-          ))}
-        </Top5List>
-      </Top5Container>
+      <Top5 allMovies={allMovies} />
       <BrowseContainer>
         <SectionTitle>
           <div>Browse</div>
