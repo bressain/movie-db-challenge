@@ -2,6 +2,10 @@
 
 :root {
 	--palette-primary: #2245E1;
+	--palette-title: #393939;
+	--palette-subtitle: #bbbaba;
+
+	--layout-side-gutter: 68px;
 }
 
 [data-reactroot] {
@@ -24,4 +28,7 @@ h1, h2, h3, h4 {
 }
 h1 {
 	font-size: 1.5em;
+}
+h2 {
+	font-size: 2em;
 }

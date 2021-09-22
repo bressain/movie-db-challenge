@@ -20,6 +20,7 @@
     "apollo-link-http": "^1.5.17",
     "apollo-link-state": "^0.4.2",
     "json-graphql-server": "^2.2.0",
+    "lodash-es": "^4.17.21",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "concurrently": "^3.1.0",
     "prettier": "^1.19.1",
+    "prop-types": "^15.7.2",
     "top-movies-json": "git+https://github.com/podium-eng-recruiting/podium-fe-challenge-support-2021.git"
   },
   "scripts": {

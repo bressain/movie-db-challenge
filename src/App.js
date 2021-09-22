@@ -52,12 +52,12 @@ const Header = styled.header`
   }
 `;
 const Content = styled.div`
-  padding: 44px 68px 0;
+  padding: 44px 0 0;
   min-height: 100vh;
 `;
 
 const App = () => {
-  const { loading } = useFetchAllMovies();
+  const { loading, data } = useFetchAllMovies();
 
   if (loading) return <div>Loading movies...</div>;
 
@@ -71,7 +71,7 @@ const App = () => {
       </Header>
       <Content>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact render={() => <Home allMovies={data} />} />
         </Switch>
       </Content>
     </Container>
