@@ -1,25 +1,9 @@
-import { arrayOf, number, shape, string } from 'prop-types';
+import { arrayOf, number, object, shape, string } from 'prop-types';
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
 import Top5 from './Top5';
+import Genres from './Genres';
+import { SectionTitle } from './shared';
 
-const SectionTitle = styled.h2`
-  color: var(--palette-title);
-  font-size: 3em;
-
-  & > div:first-of-type {
-    color: var(--palette-subtitle);
-    font-size: 0.5em;
-  }
-`;
-const BrowseContainer = styled.div`
-  background-color: #f4f5fb;
-  padding: 58px var(--layout-side-gutter) 84px;
-`;
-const BrowseList = styled.ul`
-  display: inline-flex;
-  overflow: auto;
-`;
 const BrowseAllContainer = styled.div`
   padding: 60px var(--layout-side-gutter);
 `;
@@ -42,30 +26,11 @@ const BrowseAllList = styled.ul`
  * Use `graphql/useAllMoviesQuery` instead for
  * GraphQL.
  **/
-const Home = ({ allMovies }) => {
-  const allGenres = useMemo(() => {
-    return allMovies.reduce((genres, movie) => {
-      movie.genres.forEach(g => {
-        if (!genres.has(g)) genres.add(g);
-      });
-      return genres;
-    }, new Set());
-  }, [allMovies]);
-
+const Home = ({ allMovies, moviesByGenre }) => {
   return (
     <div>
       <Top5 allMovies={allMovies} />
-      <BrowseContainer>
-        <SectionTitle>
-          <div>Browse</div>
-          <div>by Genre</div>
-        </SectionTitle>
-        <BrowseList>
-          {[...allGenres].map(genre => (
-            <li key={genre}>{genre}</li>
-          ))}
-        </BrowseList>
-      </BrowseContainer>
+      <Genres moviesByGenre={moviesByGenre} />
       <BrowseAllContainer>
         <BrowseAllHeader>
           <SectionTitle>
@@ -101,7 +66,8 @@ Home.propTypes = {
       title: string.isRequired,
       voteAverage: number.isRequired
     })
-  )
+  ),
+  moviesByGenre: object.isRequired
 };
 
 export default Home;

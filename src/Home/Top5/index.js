@@ -16,7 +16,6 @@ const Top5Title = styled.h2`
   }
 `;
 const Top5List = styled.ol`
-  list-style: none;
   display: flex;
   justify-content: space-between;
 

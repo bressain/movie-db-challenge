@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Home from './Home';
@@ -59,6 +60,22 @@ const Content = styled.div`
 const App = () => {
   const { loading, data } = useFetchAllMovies();
 
+  const moviesByGenre = useMemo(() => {
+    if (loading) return {};
+
+    return data.reduce((dict, movie) => {
+      movie.genres.forEach(genre => {
+        const genreMovies = dict[genre];
+        if (genreMovies) {
+          genreMovies.push(movie);
+        } else {
+          dict[genre] = [movie];
+        }
+      });
+      return dict;
+    }, {});
+  }, [loading, data]);
+
   if (loading) return <div>Loading movies...</div>;
 
   return (
@@ -71,7 +88,13 @@ const App = () => {
       </Header>
       <Content>
         <Switch>
-          <Route path="/" exact render={() => <Home allMovies={data} />} />
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <Home allMovies={data} moviesByGenre={moviesByGenre} />
+            )}
+          />
         </Switch>
       </Content>
     </Container>

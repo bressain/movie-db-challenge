@@ -1,7 +1,7 @@
 import { arrayOf, number, shape, string } from 'prop-types';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Star } from '../assets/Star.svg';
+import { ReactComponent as Star } from '../../assets/Star.svg';
 
 const Container = styled.li`
   display: flex;
