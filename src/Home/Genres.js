@@ -5,12 +5,16 @@ import { SectionTitle } from './shared';
 
 const BrowseContainer = styled.div`
   background-color: #f4f5fb;
-  padding: 60px var(--layout-side-gutter);
+  padding: 60px calc(var(--layout-side-gutter) - 8px);
+
+  & > h2 {
+    padding: 0 8px;
+  }
 `;
 const BrowseList = styled.ul`
   display: flex;
   column-gap: 18px;
-  padding: 28px 0;
+  padding: 28px 8px;
   width: 100%;
   overflow: auto;
 `;
@@ -26,7 +30,7 @@ const GenreLink = styled(Link)`
   font-size: 2em;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: var(--default-box-shadow);
 `;
 
 const Genres = ({ moviesByGenre }) => {

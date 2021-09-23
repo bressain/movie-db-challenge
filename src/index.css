@@ -6,6 +6,7 @@
 	--palette-subtitle: #bbbaba;
 
 	--layout-side-gutter: 68px;
+	--default-box-shadow: 0 2px 8px 3px rgba(0, 0, 0, 0.25);
 }
 
 [data-reactroot] {

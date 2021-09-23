@@ -2,6 +2,7 @@ import { arrayOf, number, shape, string } from 'prop-types';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Star } from '../../assets/Star.svg';
+import { Poster } from '../../shared';
 
 const Container = styled.li`
   display: flex;
@@ -13,15 +14,11 @@ const Container = styled.li`
   transition: box-shadow 0.25s ease-in-out;
 
   &:hover {
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: var(--default-box-shadow);
     & a {
       opacity: 1;
     }
   }
-`;
-const Poster = styled.img`
-  border-radius: 5px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
 `;
 const TitleRatingContainer = styled.div`
   display: flex;

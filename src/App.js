@@ -37,7 +37,7 @@ const Container = styled.div`
 `;
 const Header = styled.header`
   height: 66px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: var(--default-box-shadow);
   background: #fff;
   display: flex;
   align-items: center;
