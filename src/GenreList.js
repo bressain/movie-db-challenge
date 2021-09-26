@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import { Link, Redirect, useLocation, useParams } from 'react-router-dom';
+import { Redirect, useLocation, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import MovieList from './MovieList';
-import { ReactComponent as BackArrow } from './assets/BackArrow.svg';
 import SortSelect, { useSortMovies } from './SortSelect';
 import { useFetchAllMovies } from './rest';
 import { getGenreId, getMoviesByGenre } from './util';
+import BreadCrumbLink from './BreadCrumbLink';
 
 const Container = styled.div`
   padding: 0 var(--layout-side-gutter);
@@ -14,21 +14,6 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-const TitleLinkContainer = styled(Link)`
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-
-  & > h2 {
-    color: var(--palette-title);
-    font-size: 1.5em;
-    margin-left: 16px;
-
-    & > span:first-of-type {
-      color: var(--palette-subtitle);
-    }
-  }
 `;
 
 const GenreList = () => {
@@ -57,16 +42,10 @@ const GenreList = () => {
   return (
     <Container>
       <HeaderContainer>
-        <TitleLinkContainer to="/">
-          <BackArrow />
-          <h2>
-            <span>Movies: </span>
-            <span>{genre}</span>
-          </h2>
-        </TitleLinkContainer>
+        <BreadCrumbLink browserBack title={genre} />
         <SortSelect sort={sort} onSort={setSort} />
       </HeaderContainer>
-      <MovieList movies={sortedMovies} />
+      <MovieList breadCrumb={genre} movies={sortedMovies} />
     </Container>
   );
 };

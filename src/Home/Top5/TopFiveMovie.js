@@ -71,7 +71,14 @@ const TopFiveMovie = ({ movie }) => {
         </div>
       </TitleRatingContainer>
       <Genres title={movie.genres.join(', ')}>{movie.genres.join(', ')}</Genres>
-      <DetailsButton to={`/movie/${movie.id}`}>View Details</DetailsButton>
+      <DetailsButton
+        to={{
+          pathname: `/movie/${movie.id}`,
+          state: { movie, breadCrumb: 'Top 5' }
+        }}
+      >
+        View Details
+      </DetailsButton>
     </Container>
   );
 };
