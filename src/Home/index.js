@@ -24,7 +24,7 @@ const Home = ({ allMovies, moviesByGenre }) => {
 Home.propTypes = {
   allMovies: arrayOf(
     shape({
-      id: string.isRequired,
+      id: number.isRequired,
       genres: arrayOf(string).isRequired,
       popularity: number.isRequired,
       posterPath: string.isRequired,

@@ -2,6 +2,7 @@ import { object } from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { SectionTitle } from './shared';
+import { getGenreId } from '../util';
 
 const BrowseContainer = styled.div`
   background-color: #f4f5fb;
@@ -43,9 +44,7 @@ const Genres = ({ moviesByGenre }) => {
       <BrowseList>
         {Object.keys(moviesByGenre).map(genre => (
           <li key={genre}>
-            <GenreLink to={`/browse/${genre.toLowerCase().replace(' ', '-')}`}>
-              {genre}
-            </GenreLink>
+            <GenreLink to={`/browse/${getGenreId(genre)}`}>{genre}</GenreLink>
           </li>
         ))}
       </BrowseList>

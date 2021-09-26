@@ -77,7 +77,7 @@ const TopFiveMovie = ({ movie }) => {
 };
 TopFiveMovie.propTypes = {
   movie: shape({
-    id: string.isRequired,
+    id: number.isRequired,
     genres: arrayOf(string).isRequired,
     posterPath: string.isRequired,
     title: string.isRequired,

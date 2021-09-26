@@ -2,9 +2,11 @@ import { useMemo } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Home from './Home';
+import GenreList from './GenreList';
 import { ReactComponent as Logo } from './assets/Logo.svg';
 import { useFetchAllMovies } from './rest';
 import Dots from './assets/Dots.svg';
+import { getGenreId } from './util';
 
 /**
  * This function is used to simulate performance benchmarking.
@@ -75,6 +77,12 @@ const App = () => {
       return dict;
     }, {});
   }, [loading, data]);
+  const genreIdToGenre = useMemo(() => {
+    return Object.keys(moviesByGenre).reduce((dict, genre) => {
+      dict[getGenreId(genre)] = genre;
+      return dict;
+    }, {});
+  }, [moviesByGenre]);
 
   if (loading) return <div>Loading movies...</div>;
 
@@ -93,6 +101,15 @@ const App = () => {
             exact
             render={() => (
               <Home allMovies={data} moviesByGenre={moviesByGenre} />
+            )}
+          />
+          <Route
+            path="/browse/:genreId"
+            render={() => (
+              <GenreList
+                genreIdToGenre={genreIdToGenre}
+                moviesByGenre={moviesByGenre}
+              />
             )}
           />
         </Switch>
