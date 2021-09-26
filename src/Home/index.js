@@ -4,6 +4,7 @@ import Genres from './Genres';
 import BrowseAll from './BrowseAll';
 import { useFetchAllMovies } from '../rest';
 import { getMoviesByGenre } from '../util';
+import Loading from '../Loading';
 
 /**
  * You have the option to use either REST
@@ -19,7 +20,7 @@ const Home = () => {
 
   const moviesByGenre = useMemo(() => getMoviesByGenre(data), [data]);
 
-  if (loading) return <div>Loading movies...</div>;
+  if (loading) return <Loading />;
 
   return (
     <>

@@ -4,6 +4,7 @@ import { useFetchMovie } from './rest';
 import BreadCrumbLink from './BreadCrumbLink';
 import { ReactComponent as Star } from './assets/Star.svg';
 import { ReactComponent as Avatar } from './assets/Avatar.svg';
+import Loading from './Loading';
 
 const Container = styled.div`
   padding: 0 var(--layout-side-gutter);
@@ -113,7 +114,7 @@ const MovieDetails = () => {
   const movie = state?.movie ?? data;
 
   if (error) return <Redirect to="/" />;
-  if (loading && !movie) return <div>Loading movie...</div>;
+  if (loading && !movie) return <Loading />;
 
   return (
     <Container>

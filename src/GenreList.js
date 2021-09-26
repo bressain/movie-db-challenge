@@ -6,6 +6,7 @@ import SortSelect, { useSortMovies } from './SortSelect';
 import { useFetchAllMovies } from './rest';
 import { getGenreId, getMoviesByGenre } from './util';
 import BreadCrumbLink from './BreadCrumbLink';
+import Loading from './Loading';
 
 const Container = styled.div`
   padding: 0 var(--layout-side-gutter);
@@ -35,7 +36,7 @@ const GenreList = () => {
   const movies = moviesByGenre[genre];
   const { sort, sortedMovies, setSort } = useSortMovies(movies);
 
-  if (loading && !genre) return <div>Loading movies...</div>;
+  if (loading && !genre) return <Loading />;
 
   if (!genre) return <Redirect to="/" />;
 
