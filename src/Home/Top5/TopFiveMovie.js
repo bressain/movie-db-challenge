@@ -71,7 +71,7 @@ const TopFiveMovie = ({ movie }) => {
         </div>
       </TitleRatingContainer>
       <Genres title={movie.genres.join(', ')}>{movie.genres.join(', ')}</Genres>
-      <DetailsButton to={`/top-5/${movie.id}`}>View Details</DetailsButton>
+      <DetailsButton to={`/movie/${movie.id}`}>View Details</DetailsButton>
     </Container>
   );
 };

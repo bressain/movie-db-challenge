@@ -44,7 +44,14 @@ const Genres = ({ moviesByGenre }) => {
       <BrowseList>
         {Object.keys(moviesByGenre).map(genre => (
           <li key={genre}>
-            <GenreLink to={`/browse/${getGenreId(genre)}`}>{genre}</GenreLink>
+            <GenreLink
+              to={{
+                pathname: `/browse/${getGenreId(genre)}`,
+                state: { moviesByGenre }
+              }}
+            >
+              {genre}
+            </GenreLink>
           </li>
         ))}
       </BrowseList>

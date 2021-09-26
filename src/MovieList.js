@@ -11,12 +11,12 @@ const List = styled.ul`
   margin-top: 34px;
 `;
 
-const MovieList = ({ breadCrumb, movies }) => {
+const MovieList = ({ movies }) => {
   return (
     <List>
       {movies.map(movie => (
         <li key={movie.id}>
-          <Link to={`/${breadCrumb}/${movie.id}`}>
+          <Link to={`/movie/${movie.id}`}>
             <Poster src={movie.posterPath} alt={movie.title} />
           </Link>
         </li>
@@ -25,7 +25,6 @@ const MovieList = ({ breadCrumb, movies }) => {
   );
 };
 MovieList.propTypes = {
-  breadCrumb: string.isRequired,
   movies: arrayOf(
     shape({
       id: number.isRequired,

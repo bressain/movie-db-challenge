@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { REST_API_ROOT_ENDPOINT } from './index';
 
-const useFetchMovies = skip => {
-  const [data, setData] = useState([]);
+const useFetchMovie = (id, skip) => {
+  const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const endpoint = `${REST_API_ROOT_ENDPOINT}/movies`;
+  const endpoint = `${REST_API_ROOT_ENDPOINT}/movies/${id}`;
 
   useEffect(() => {
     if (skip) return;
@@ -25,4 +25,4 @@ const useFetchMovies = skip => {
   return { data, loading, error };
 };
 
-export default useFetchMovies;
+export default useFetchMovie;

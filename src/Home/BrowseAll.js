@@ -25,7 +25,7 @@ const BrowseAll = ({ allMovies }) => {
         </SectionTitle>
         <SortSelect onSort={setSort} sort={sort} />
       </BrowseAllHeader>
-      <MovieList breadCrumb="all" movies={sortedMovies} />
+      <MovieList movies={sortedMovies} />
     </BrowseAllContainer>
   );
 };

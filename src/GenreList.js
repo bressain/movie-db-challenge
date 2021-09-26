@@ -1,9 +1,11 @@
-import { object } from 'prop-types';
-import { Link, Redirect, useParams } from 'react-router-dom';
+import { useMemo } from 'react';
+import { Link, Redirect, useLocation, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import MovieList from './MovieList';
 import { ReactComponent as BackArrow } from './assets/BackArrow.svg';
 import SortSelect, { useSortMovies } from './SortSelect';
+import { useFetchAllMovies } from './rest';
+import { getGenreId, getMoviesByGenre } from './util';
 
 const Container = styled.div`
   padding: 0 var(--layout-side-gutter);
@@ -29,11 +31,26 @@ const TitleLinkContainer = styled(Link)`
   }
 `;
 
-const GenreList = ({ genreIdToGenre, moviesByGenre }) => {
+const GenreList = () => {
   const { genreId } = useParams();
+  const { state } = useLocation();
+  const { loading, data } = useFetchAllMovies(!!state?.moviesByGenre);
+
+  const moviesByGenre = useMemo(() => {
+    return state?.moviesByGenre ?? getMoviesByGenre(data);
+  }, [state?.moviesByGenre, data]);
+  const genreIdToGenre = useMemo(() => {
+    return Object.keys(moviesByGenre).reduce((dict, genre) => {
+      dict[getGenreId(genre)] = genre;
+      return dict;
+    }, {});
+  }, [moviesByGenre]);
+
   const genre = genreIdToGenre[genreId];
   const movies = moviesByGenre[genre];
   const { sort, sortedMovies, setSort } = useSortMovies(movies);
+
+  if (loading && !genre) return <div>Loading movies...</div>;
 
   if (!genre) return <Redirect to="/" />;
 
@@ -49,13 +66,9 @@ const GenreList = ({ genreIdToGenre, moviesByGenre }) => {
         </TitleLinkContainer>
         <SortSelect sort={sort} onSort={setSort} />
       </HeaderContainer>
-      <MovieList breadCrumb={genre} movies={sortedMovies} />
+      <MovieList movies={sortedMovies} />
     </Container>
   );
-};
-GenreList.propTypes = {
-  genreIdToGenre: object.isRequired,
-  moviesByGenre: object.isRequired
 };
 
 export default GenreList;

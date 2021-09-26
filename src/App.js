@@ -1,12 +1,10 @@
-import { useMemo } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Home from './Home';
 import GenreList from './GenreList';
 import { ReactComponent as Logo } from './assets/Logo.svg';
-import { useFetchAllMovies } from './rest';
 import Dots from './assets/Dots.svg';
-import { getGenreId } from './util';
+import MovieDetails from './MovieDetails';
 
 /**
  * This function is used to simulate performance benchmarking.
@@ -60,32 +58,6 @@ const Content = styled.div`
 `;
 
 const App = () => {
-  const { loading, data } = useFetchAllMovies();
-
-  const moviesByGenre = useMemo(() => {
-    if (loading) return {};
-
-    return data.reduce((dict, movie) => {
-      movie.genres.forEach(genre => {
-        const genreMovies = dict[genre];
-        if (genreMovies) {
-          genreMovies.push(movie);
-        } else {
-          dict[genre] = [movie];
-        }
-      });
-      return dict;
-    }, {});
-  }, [loading, data]);
-  const genreIdToGenre = useMemo(() => {
-    return Object.keys(moviesByGenre).reduce((dict, genre) => {
-      dict[getGenreId(genre)] = genre;
-      return dict;
-    }, {});
-  }, [moviesByGenre]);
-
-  if (loading) return <div>Loading movies...</div>;
-
   return (
     <Container>
       <Header>
@@ -96,22 +68,12 @@ const App = () => {
       </Header>
       <Content>
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <Home allMovies={data} moviesByGenre={moviesByGenre} />
-            )}
-          />
-          <Route
-            path="/browse/:genreId"
-            render={() => (
-              <GenreList
-                genreIdToGenre={genreIdToGenre}
-                moviesByGenre={moviesByGenre}
-              />
-            )}
-          />
+          <Route path="/" exact component={Home} />
+          <Route path="/browse/:genreId" component={GenreList} />
+          <Route path="/movie/:id" component={MovieDetails} />
+          <Route path="/">
+            <Redirect to="/" />
+          </Route>
         </Switch>
       </Content>
     </Container>
