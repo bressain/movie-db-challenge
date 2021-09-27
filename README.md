@@ -1,4 +1,4 @@
-# Podium frontend take-home challenge
+# Frontend take-home challenge
 Thank you for taking the time to complete this assessment. This application contains the necessary starting grounds for you to complete the tasks as outlined below. Please take as much time as you feel is necessary to demonstrate your ability. Unless otherwise stated, you are expected to document and test along the way as you see fit. 
 
 
